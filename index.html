@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso WiFi - Portal Publicitario</title>
+    <style>
+        :root {
+            --primary: #2b2e4a;
+            --secondary: #e84545;
+            --bg: #f3f3f3;
+            --text: #222;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+        .wrapper {
+            max-width: 500px;
+            margin: 3rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--primary);
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .ads {
+            margin-top: 2rem;
+        }
+        .ad-banner {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .ad-banner img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper" id="login-section">
+    <h1>Conexión Wi-Fi</h1>
+    <input type="text" id="userId" placeholder="Usuario">
+    <input type="password" id="userKey" placeholder="Contraseña">
+    <button onclick="authUser()">Entrar</button>
+    <p>¿Nuevo? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
+</div>
+
+<div class="wrapper hidden" id="register-section">
+    <h1>Registro</h1>
+    <input type="text" id="newUser" placeholder="Nuevo usuario">
+    <input type="password" id="newPass" placeholder="Nueva contraseña">
+    <button onclick="saveUser()">Crear cuenta</button>
+    <p>¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión</a></p>
+</div>
+
+<div class="wrapper hidden" id="portal-section">
+    <h1>Bienvenido</h1>
+    <p>Has accedido exitosamente a la red. Disfruta el contenido patrocinado:</p>
+    <div class="ads">
+        <div class="ad-banner" onclick="countClick(0)">
+            <img src="https://via.placeholder.com/400x150?text=Publicidad+1" alt="Ad 1">
+        </div>
+        <div class="ad-banner" onclick="countClick(1)">
+            <img src="https://via.placeholder.com/400x150/ff6666/fff?text=Publicidad+2" alt="Ad 2">
+        </div>
+        <div class="ad-banner" onclick="countClick(2)">
+            <img src="https://via.placeholder.com/400x150/4CAF50/fff?text=Publicidad+3" alt="Ad 3">
+        </div>
+    </div>
+    <p>Total de clics: <span id="clickTotal">0</span></p>
+</div>
+
+<script>
+    function switchToRegister() {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('register-section').classList.remove('hidden');
+    }
+
+    function switchToLogin() {
+        document.getElementById('register-section').classList.add('hidden');
+        document.getElementById('login-section').classList.remove('hidden');
+    }
+
+    function saveUser() {
+        const newUser = document.getElementById('newUser').value;
+        const newPass = document.getElementById('newPass').value;
+        if (!newUser || !newPass) return alert("Rellena todos los campos.");
+        localStorage.setItem('loginData', JSON.stringify({ user: newUser, pass: newPass }));
+        alert("Usuario registrado correctamente. Inicia sesión.");
+        switchToLogin();
+    }
+
+    function authUser() {
+        const data = JSON.parse(localStorage.getItem('loginData') || '{}');
+        const user = document.getElementById('userId').value;
+        const pass = document.getElementById('userKey').value;
+        if (user === data.user && pass === data.pass) {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('portal-section').classList.remove('hidden');
+        } else {
+            alert("Credenciales incorrectas.");
+        }
+    }
+
+    function countClick(index) {
+        let stats = JSON.parse(localStorage.getItem('clickStats') || '[0,0,0]');
+        stats[index] += 1;
+        localStorage.setItem('clickStats', JSON.stringify(stats));
+        document.getElementById('clickTotal').innerText = stats.reduce((a,b) => a + b, 0);
+    }
+
+    // Mostrar total de clics si ya hay
+    document.addEventListener('DOMContentLoaded', () => {
+        const stats = JSON.parse(localStorage.getItem('clickStats') || '[0,0,0]');
+        document.getElementById('clickTotal').innerText = stats.reduce((a,b) => a + b, 0);
+    });
+</script>
+
+</body>
+</html>
