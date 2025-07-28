@@ -696,7 +696,6 @@ button:hover {
       }
       const user = { username, password };
       localStorage.setItem('registeredUser', JSON.stringify(user));
-      alert('Registro exitoso. Ahora inicia sesión.');
       showLoginPage();
     }
 
@@ -712,7 +711,7 @@ button:hover {
         renderAdList();
         updateTotalClicks();
       } else {
-        document.getElementById('loginError').textContent = 'Credenciales incorrectas. Inténtalo de nuevo.';
+        document.getElementById('loginError').textContent = 'Usuario o contraseña no válidos. Por favor verifica tus datos.';
       }
     }
 
