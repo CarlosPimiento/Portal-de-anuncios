@@ -550,16 +550,6 @@ button:hover {
   </footer>
 </div>
 
-  <!-- Modal de Anuncio al Iniciar Sesión -->
-  <div id="loginAdModal" style="display:none;">
-      <div id="loginAdContent">
-          <button class="close" onclick="closeLoginAd()">"X"</button>
-          <h4>Bienvenido a Nuestro Portal</h4>
-          <p>¡Descubre nuestras ofertas publicitarias!</p>
-          <img src="https://th.bing.com/th/id/OIP.Daex7nw0ZBMrnsNRVn6s-QHaEu?rs=1&pid=ImgDetMain" alt="Publicidad">
-      </div>
-  </div>
-
   <!-- Anuncio Emergente al Hacer Scroll -->
   <div id="scrollAd" style="display: none;">
     <button class="close" onclick="closeScrollAd()">X</button>
@@ -675,7 +665,6 @@ button:hover {
       document.getElementById('registrationPage').classList.remove('active');
       document.getElementById('loginPage').classList.remove('active');
       document.getElementById('mainPage').classList.add('active');
-      document.getElementById('loginAdModal').style.display = 'flex'; // Mostrar modal
     }
 
     /* Registro: almacena datos de usuario en localStorage */
