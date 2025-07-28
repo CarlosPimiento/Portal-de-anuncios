@@ -65,15 +65,18 @@ input[type="password"]:focus {
 }
 
 button {
-  background: #2a9d8f;
-  color: #ffffff;
+  background-color: #f7b801;
+  color: #000000;
   border: none;
-  padding: 12px;
-  width: 100%;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #fcb900;
 }
 
 button:hover {
@@ -157,14 +160,13 @@ button:hover {
     }
 
     /* Portal Principal */
-    header {
-      background-color: #0056b3;
-      color: #ffffff;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 4px solid #003d80;
-    }
-
+  header {
+  background-color: #ff6b35; /* Naranja intenso */
+  color: #ffffff;
+  text-align: center;
+  padding: 2rem 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
     header h1 {
       font-size: 2rem;
       margin-bottom: 5px;
@@ -203,14 +205,13 @@ button:hover {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    footer {
-      background-color: #003d80;
-      color: #ffffff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-      font-size: 1rem;
-    }
+footer {
+  background-color: #ff924c;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
 
     /* Anuncios */
     .ad-banner {
@@ -230,15 +231,12 @@ button:hover {
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
-.ad-banner img {
-  width: 100%;
-  height: 200px; /* Establece un tamaño mediano fijo */
-  object-fit: cover; /* Mantiene proporción sin deformar */
-  border-bottom: 1px solid #d1d5db;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-}
+    .ad-banner img {
+      max-width: 100%;
+      border-bottom: 1px solid #d1d5db;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
 
     .ad-banner h3 {
       font-size: 1.2rem;
