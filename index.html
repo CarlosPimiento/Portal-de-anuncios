@@ -1,143 +1,296 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso WiFi - Portal Publicitario</title>
-    <style>
-        :root {
-            --primary: #2b2e4a;
-            --secondary: #e84545;
-            --bg: #f3f3f3;
-            --text: #222;
-        }
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-        }
-        .wrapper {
-            max-width: 500px;
-            margin: 3rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: var(--primary);
-            text-align: center;
-        }
-        input, button {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .ads {
-            margin-top: 2rem;
-        }
-        .ad-banner {
-            margin: 1rem 0;
-            text-align: center;
-        }
-        .ad-banner img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Portal de Anuncios - Registro, Login y Anuncios</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Reset general */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Estilos Generales */
+    .page {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .form-container {
+      width: 350px;
+      margin: 50px auto;
+      padding: 25px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px; /* Cambié el borde a más redondeado */
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más fuerte */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 1px solid #d1d5db;
+      border-radius: 10px; /* Borde más redondeado */
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #4CAF50; /* Color al enfocar los inputs */
+    }
+
+    button {
+      background: #4CAF50; /* Verde brillante */
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 10px; /* Botones redondeados */
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #45a049; /* Sombra oscura al pasar el mouse */
+    }
+
+    a {
+      color: #4CAF50; /* Verde brillante */
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Modal de Anuncio */
+    #loginAdModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    #loginAdContent {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 350px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #loginAdContent button.close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: transparent;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #555;
+    }
+
+    /* Portal Principal */
+    header {
+      background-color: #4CAF50;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid #388E3C; /* Fondo más oscuro */
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 5px;
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 10px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .content-main {
+      flex: 1;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más fuerte */
+    }
+
+    footer {
+      background-color: #388E3C;
+      color: #ffffff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      font-size: 1rem;
+    }
+
+    /* Estilo de Anuncios */
+    .ad-banner {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px; /* Borde redondeado */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .ad-banner:hover {
+      transform: scale(1.05); /* Escala al pasar */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .ad-banner img {
+      max-width: 100%;
+      border-bottom: 1px solid #d1d5db;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .ad-banner h3 {
+      font-size: 1.3rem;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .ad-info {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Anuncio Emergente al Hacer Scroll */
+    #scrollAd {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      z-index: 1000;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+      padding: 15px;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    #scrollAd h4 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+      text-align: center;
+      color: #388E3C;
+    }
+
+    #scrollAd button.close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: transparent;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #555;
+      transition: color 0.3s ease;
+    }
+
+    #scrollAd button.close:hover {
+      color: #000;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- =======================
+       Página de Registro
+       ======================= -->
+  <div id="registrationPage" class="page">
+      <div class="form-container">
+          <h2>Registro Rápido</h2>
+          <input type="text" id="regUsername" placeholder="Nombre de usuario">
+          <input type="password" id="regPassword" placeholder="Contraseña">
+          <button onclick="registerUser()">Registrar</button>
+          <p>¿Ya tienes cuenta? <a href="#" onclick="showLoginPage()">Inicia sesión</a></p>
+      </div>
+  </div>
 
-<div class="wrapper" id="login-section">
-    <h1>Conexión Wi-Fi</h1>
-    <input type="text" id="userId" placeholder="Usuario">
-    <input type="password" id="userKey" placeholder="Contraseña">
-    <button onclick="authUser()">Entrar</button>
-    <p>¿Nuevo? <a href="#" onclick="switchToRegister()">Regístrate aquí</a></p>
-</div>
-
-<div class="wrapper hidden" id="register-section">
-    <h1>Registro</h1>
-    <input type="text" id="newUser" placeholder="Nuevo usuario">
-    <input type="password" id="newPass" placeholder="Nueva contraseña">
-    <button onclick="saveUser()">Crear cuenta</button>
-    <p>¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión</a></p>
-</div>
-
-<div class="wrapper hidden" id="portal-section">
-    <h1>Bienvenido</h1>
-    <p>Has accedido exitosamente a la red. Disfruta el contenido patrocinado:</p>
-    <div class="ads">
-        <div class="ad-banner" onclick="countClick(0)">
-            <img src="https://via.placeholder.com/400x150?text=Publicidad+1" alt="Ad 1">
-        </div>
-        <div class="ad-banner" onclick="countClick(1)">
-            <img src="https://via.placeholder.com/400x150/ff6666/fff?text=Publicidad+2" alt="Ad 2">
-        </div>
-        <div class="ad-banner" onclick="countClick(2)">
-            <img src="https://via.placeholder.com/400x150/4CAF50/fff?text=Publicidad+3" alt="Ad 3">
-        </div>
-    </div>
-    <p>Total de clics: <span id="clickTotal">0</span></p>
-</div>
-
-<script>
-    function switchToRegister() {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('register-section').classList.remove('hidden');
-    }
-
-    function switchToLogin() {
-        document.getElementById('register-section').classList.add('hidden');
-        document.getElementById('login-section').classList.remove('hidden');
-    }
-
-    function saveUser() {
-        const newUser = document.getElementById('newUser').value;
-        const newPass = document.getElementById('newPass').value;
-        if (!newUser || !newPass) return alert("Rellena todos los campos.");
-        localStorage.setItem('loginData', JSON.stringify({ user: newUser, pass: newPass }));
-        alert("Usuario registrado correctamente. Inicia sesión.");
-        switchToLogin();
-    }
-
-    function authUser() {
-        const data = JSON.parse(localStorage.getItem('loginData') || '{}');
-        const user = document.getElementById('userId').value;
-        const pass = document.getElementById('userKey').value;
-        if (user === data.user && pass === data.pass) {
-            document.getElementById('login-section').classList.add('hidden');
-            document.getElementById('portal-section').classList.remove('hidden');
-        } else {
-            alert("Credenciales incorrectas.");
-        }
-    }
-
-    function countClick(index) {
-        let stats = JSON.parse(localStorage.getItem('clickStats') || '[0,0,0]');
-        stats[index] += 1;
-        localStorage.setItem('clickStats', JSON.stringify(stats));
-        document.getElementById('clickTotal').innerText = stats.reduce((a,b) => a + b, 0);
-    }
-
-    // Mostrar total de clics si ya hay
-    document.addEventListener('DOMContentLoaded', () => {
-        const stats = JSON.parse(localStorage.getItem('clickStats') || '[0,0,0]');
-        document.getElementById('clickTotal').innerText = stats.reduce((a,b) => a + b, 0);
-    });
+  <!-- =======================
+       Página de Login
+       ======================= -->
+  <div id="loginPage" class="page">
+      <div class="form-container">
+          <h2>Iniciar Sesión</h2>
+          <input type="text" id="loginUsername" placeholder="Nombre de usuario">
+          <input
 </script>
 
 </body>
