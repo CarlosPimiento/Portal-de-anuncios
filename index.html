@@ -28,63 +28,74 @@
       display: block;
     }
 
-  .form-container {
-  width: 380px;
-  margin: 60px auto;
+ .form-container {
+  width: 350px;
+  margin: 50px auto;
   padding: 30px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f9f9ff, #e6f7f1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #cce3dc;
   text-align: center;
 }
 
 .form-container h2 {
   margin-bottom: 20px;
+  color: #2b6777;
   font-size: 1.8rem;
-  color: #0b8457;
 }
 
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   margin: 12px 0;
-  border: none;
-  border-radius: 12px;
-  background: #eefaf3;
+  border: 1px solid #b7d6c8;
+  border-radius: 8px;
   font-size: 1rem;
-  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  outline: none;
+  background-color: #ffffff;
+  transition: box-shadow 0.3s ease;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  outline: none;
-  background: #ffffff;
-  box-shadow: 0 0 0 2px #3dbb85;
+  box-shadow: 0 0 5px rgba(42, 157, 143, 0.5);
+  border-color: #2a9d8f;
 }
 
 button {
-  background: linear-gradient(135deg, #3dbb85, #0b8457);
+  background: #2a9d8f;
   color: #ffffff;
   border: none;
-  padding: 14px;
+  padding: 12px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.4s ease, transform 0.2s ease;
-  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #37a877, #096b47);
-  transform: scale(1.02);
+  background: #21867a;
+  transform: translateY(-1px);
 }
 
+.form-container p {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.form-container a {
+  color: #2a9d8f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
 .form-container p {
   margin-top: 15px;
   font-size: 0.95rem;
