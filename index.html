@@ -190,10 +190,10 @@ button:hover {
     }
 
 .content-wrapper {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
-  /* Quitar flexbox para que no divida espacio */
+  width: 100%;       /* Ocupa el 100% del ancho */
+  margin: 0;         /* Sin margen */
+  padding: 20px;     /* Puedes dejar el padding para separación interna */
+  display: block;    /* Para que no sea flex, a menos que quieras flex para otros fines */
 }
 
     .content-main {
